@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business News Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-newspaper" aria-hidden="true"></i>
+                    <span>Business News Hub</span>
+                </h1>
+                <nav class="main-nav" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                                Categories <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" class="dropdown-item" role="menuitem">Technology</a></li>
+                                <li><a href="#" class="dropdown-item" role="menuitem">Finance</a></li>
+                                <li><a href="#" class="dropdown-item" role="menuitem">Markets</a></li>
+                                <li><a href="#" class="dropdown-item" role="menuitem">Startups</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <label for="searchInput" class="sr-only">Search news articles</label>
+                        <input type="text" id="searchInput" placeholder="Search news articles..." class="search-input" aria-label="Search news articles">
+                        <button id="searchBtn" class="search-btn" aria-label="Search">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </button>
+                        <button id="clearBtn" class="clear-btn" style="display: none;" aria-label="Clear search">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main" role="main">
+        <div class="container">
+            <section class="hero">
+                <h2>Latest Business News</h2>
+                <p>Stay updated with the latest business headlines from around the world</p>
+                <div class="hero-cta">
+                    <button class="cta-button primary" id="subscribeBtn">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        Subscribe for Updates
+                    </button>
+                    <button class="cta-button secondary" id="exploreBtn">
+                        <i class="fas fa-compass" aria-hidden="true"></i>
+                        Explore Categories
+                    </button>
+                </div>
+            </section>
+
+            <div class="controls">
+                <div class="results-info">
+                    <span id="resultsCount" role="status" aria-live="polite">Loading articles...</span>
+                    <div id="dataSource" class="data-source-indicator" style="display: none;">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                        <span id="dataSourceText">Demo Content</span>
+                    </div>
+                </div>
+                <div class="view-controls">
+                    <button id="refreshBtn" class="control-btn" aria-label="Refresh articles">
+                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                        Refresh
+                    </button>
+                    <button id="viewToggle" class="control-btn" aria-label="Toggle view mode">
+                        <i class="fas fa-th-large" aria-hidden="true"></i>
+                        Grid View
+                    </button>
+                </div>
+            </div>
+
+            <div id="loadingSpinner" class="loading-spinner" role="status" aria-live="polite">
+                <div class="spinner" aria-hidden="true"></div>
+                <p>Loading latest business news...</p>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <div class="error-content">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Something went wrong</h3>
+                    <p id="errorText">Unable to load news articles. Please try again later.</p>
+                    <button id="retryBtn" class="retry-btn">Try Again</button>
+                </div>
+            </div>
+
+            <section id="newsContainer" class="news-container" role="region" aria-label="News articles">
+                <!-- News articles will be dynamically inserted here -->
+            </section>
+
+            <div id="paginationContainer" class="pagination-container" style="display: none;">
+                <div class="pagination">
+                    <button id="prevBtn" class="pagination-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <div class="pagination-info">
+                        <span id="pageInfo">Page 1 of 1</span>
+                    </div>
+                    <button id="nextBtn" class="pagination-btn" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <div class="no-results-content">
+                    <i class="fas fa-search"></i>
+                    <h3>No articles found</h3>
+                    <p>Try adjusting your search terms or check back later for new articles.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Business News Hub</h3>
+                    <p class="footer-description">Your trusted source for the latest business news and insights from around the world.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Follow us on Twitter">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Follow us on LinkedIn">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Follow us on Facebook">
+                            <i class="fab fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Subscribe to our RSS feed">
+                            <i class="fas fa-rss" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Contact</a></li>
+                        <li><a href="#" class="footer-link">Advertise</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Technology</a></li>
+                        <li><a href="#" class="footer-link">Finance</a></li>
+                        <li><a href="#" class="footer-link">Markets</a></li>
+                        <li><a href="#" class="footer-link">Startups</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-link">Terms of Service</a></li>
+                        <li><a href="#" class="footer-link">Cookie Policy</a></li>
+                        <li><a href="#" class="footer-link">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Business News Hub. Built by SUMAN SHARMA. All rights reserved.</p>
+                <div class="footer-cta">
+                    <button class="cta-button small" id="newsletterBtn">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        Subscribe to Newsletter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top" style="display: none;">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" style="display: none;">
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close lightbox">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <img id="lightboxImage" class="lightbox-image" alt="" />
+            <div class="lightbox-caption">
+                <h3 id="lightboxTitle"></h3>
+                <p id="lightboxDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen Reader Only Content -->
+    <div class="sr-only">
+        <h1>Business News Hub - Accessibility Information</h1>
+        <p>This website provides the latest business news with full keyboard navigation support. Use Tab to navigate, Enter to activate buttons, and Escape to close modals.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
